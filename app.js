@@ -10,6 +10,8 @@ var router = require("./router/router.js");
 var db = require("./models/db.js");
 var path = require("path");
 app.use("/lib",express.static(path.join(__dirname, 'public')));
+app.use("/privateJS",express.static(path.join(__dirname, 'views/JS')));
+
 
 //设置模板引擎
 app.set("view engine","ejs");
@@ -24,6 +26,10 @@ app.get("/removeStudent/:sid",router.removeStudent);                    //执行
 app.get("/addKecheng",router.showAddKecheng);                           //显示添加课程页面
 app.get("/doAddKecheng",router.doAddKecheng);                           //执行添加课程操作
 app.get("/removeKecheng/:kid",router.removeKecheng);                    //执行删除课程操作
+
+
+//接口
+app.get("/queryAllKecheng",router.queryAllKecheng);
 
 
 

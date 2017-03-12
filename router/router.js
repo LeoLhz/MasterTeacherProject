@@ -28,6 +28,15 @@ exports.showAddStudent = function(req,res){
     });
 };
 
+
+//查询所有课程
+exports.queryAllKecheng = function(req,res){
+    //先要去查询，有多少种课程，然后交付add模板引擎
+    Kecheng.find({},function(err,result){
+        res.send({"allkecheng" : result});
+    });
+};
+
 //添加学生信息操作
 exports.doAddStudent = function(req,res){
     //存储数据
@@ -35,23 +44,21 @@ exports.doAddStudent = function(req,res){
     //req.query就是对象
     //{name: 小红 ,  sex:男，  kechengs:[100,102]}
 
+    console.log(req.query);
     var id = req.query.sid;
 
     Student.find({'sid':id},function(err,result){
         if (result.length == 1) {
-            console.log("该学生id已经存在，请换个id进行添加学生信息操作！");
+            res.send({result:'fail',reason:'exists'});
         } else {
             Student.create(req.query,function(){
-                console.log("添加学生信息成功！");
                 //在课程中添加此人
                 Kecheng.addStudent(req.query.Kechengs,req.query.sid,function(){
-                    res.send("插入成功");
+                    res.send({result:'success',reason:''});
                 });
             });
         }
     });
-    //跳转到首页
-    res.redirect("/");
 };
 
 //显示修改学生页面
