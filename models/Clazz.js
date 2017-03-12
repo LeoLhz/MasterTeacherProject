@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 
 //schema
 var clazzSchema = new mongoose.Schema({
-	"sid"  : Number,
+	"cid"  : Number,
 	"grade"  : String,  //年级
 	"clazzType"  : String,  //班级类型
 	"name" : String,  //班级名称
@@ -15,11 +15,12 @@ var clazzSchema = new mongoose.Schema({
 	"studentNum" : Number,  //人数
 	"clazzMonitor" : Number,  //班长id
 	"clazzSecretary" : Number, //团支书id
-    "Students" : [Student]   //存放课程的kid
+	"courseId" : [Number],   //存放课程信息
+    "studentId" : [Number]   //存放学生信息
 });
 
 //索引
-clazzSchema.index({ "sid": 1});
+clazzSchema.index({ "cid": 1});
 
 //model
 var Clazz = mongoose.model("Clazz",clazzSchema);

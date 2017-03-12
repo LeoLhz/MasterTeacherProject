@@ -1,5 +1,4 @@
 	/**
-	 * @author yaobei on 2016/11/13
 	 * @学生类
 	 */
 
@@ -9,10 +8,11 @@
 	//schema
 	var studentSchema = new mongoose.Schema({
 		"sid"  : Number,
-		"clazzid"  : Number,  // 班级id
+		"clazzId"  : Number,  // 班级id
 	    "name" : String,  //名称
 	    "age" : Number,  //年龄
 	    "sex" : String,  // 性别
+	    "type" : String,  // 学生类型
 		"photograph"  : String,  //头像地址		
 		"phone"  : Number,  //手机号
 		"address"  : String,  //住址
@@ -22,8 +22,9 @@
 		"tuitionId"  : [Number], // 存放学费情况
 		"reportId"  : [Number],  //存放成绩情况
 		"attendanceId"  : [Number],  //存放考勤情况
+		"courseId"  : [Number],  //存放课目情况
 		"rewardId"  : [Number]   // 存放奖罚情况
-});
+	});
 
 	//索引
 	studentSchema.index({ "sid": 1});
